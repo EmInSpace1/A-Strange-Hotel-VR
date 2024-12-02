@@ -8,6 +8,7 @@ public class HandInteraction : MonoBehaviour
 {
     [SerializeField] private InputActionProperty pickUpObject;
     [SerializeField] private float handSpeedMultiplier = 50;
+    [SerializeField] private LayerMask grabLayer;
 
     private bool closingHand;
     private bool holding;
@@ -61,7 +62,7 @@ public class HandInteraction : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Holdable" && !holding && closingHand)
+        if (other.gameObject.CompareTag("Grabbable") && !holding && closingHand)
         {
             //check if the object being tried to picked up is already being held, or if it's a hat (otherwise you wouldn't be able to remove the hat from your head)
             if (!other.gameObject.GetComponent<Rigidbody>().isKinematic)
